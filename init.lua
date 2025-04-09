@@ -1,0 +1,12 @@
+require "keymaps"
+require "autobots"
+require "lazy-config"
+require "options"
+require "nvim-tree-config"
+require "lsp-config"
+require "whichkey"
+require "toggleterm-config"
+require "autopairs-config"
+require "lualine-config"
+require "bufferline-config"
+--require 'telescope-config'
