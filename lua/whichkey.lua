@@ -4,9 +4,6 @@ local mappings = {
   { "<leader>f", group = "file" }, -- group
   { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find File", mode = "n" },
   { "<leader>e", "<cmd>NvimTreeToggle<cr>", desc = "Exprorer" },
-  { "<leader>t", group = "Term" },
-  { "<leader>th", "<cmd>ToggleTerm size=15 direction=horizontal<cr>", desc = "Horizontal"},
-  { "<leader>tt", "<cmd>ToggleTerm<cr>", desc = "Default" },
   { "<leader>f1", hidden = true }, -- hide this keymap
   { "<leader>d", "<cmd>lua vim.diagnostic.open_float()<cr>", desc = "Diagnostic"},
   {
