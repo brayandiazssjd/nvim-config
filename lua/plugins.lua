@@ -1,22 +1,16 @@
 return {
   -- Autopairs
   {
-    "neovim/nvim-lspconfig",
-    config = function()
-      vim.diagnostic.config({
-        virtual_text = true,
-        signs = true,
-        update_in_insert = false,
-        underline = true,
-        severity_sort = false,
-        float = true,
-      })
-    end,
+    "saghen/blink.pairs",
+    version = "*",
+    config = true,
+    enabled = true,
+    dependencies = { "saghen/blink.download" },
   },
   {
     "windwp/nvim-autopairs",
     event = "InsertEnter",
-    enabled = true,
+    enabled = false,
     config = true,
   },
 
@@ -49,7 +43,6 @@ return {
         ['<Tab>'] = { 'snippet_forward', 'fallback' },
         ['<S-Tab>'] = { 'snippet_backward', 'fallback' },
         ['<C-k>'] = { 'show_signature', 'hide_signature', 'fallback' },
-        ['<Esc>'] = { 'cancel', 'fallback' },
       },
       completion = {
         accept = {
@@ -76,15 +69,14 @@ return {
     },
   },
 
-  -- Mason
+  -- Language Support
   {
-    "mason-org/mason.nvim",
-    opts = {},
+    "L3MON4D3/LuaSnip",
+    dependencies = { "rafamadriz/friendly-snippets" },
     config = function()
-      require("mason").setup()
+      require("luasnip.loaders.from_vscode").lazy_load()
     end,
   },
-  -- Language Support
   {
     "mason-org/mason-lspconfig.nvim",
     opts = {},
@@ -92,14 +84,26 @@ return {
       require("mason-lspconfig").setup()
     end,
   },
-  -- Snippets
   {
-    "L3MON4D3/LuaSnip",
-    dependencies = { "rafamadriz/friendly-snippets" },
+    "neovim/nvim-lspconfig",
     config = function()
-      require("luasnip.loaders.from_vscode").lazy_load()
+      vim.diagnostic.config({
+        virtual_text = true,
+        signs = true,
+        update_in_insert = false,
+        underline = true,
+        severity_sort = false,
+        float = true,
+      })
     end,
-  }, 
+  },
+  {
+    "mason-org/mason.nvim",
+    opts = {},
+    config = function()
+      require("mason").setup()
+    end,
+  },
   {
     'nvim-tree/nvim-tree.lua',
     lazy = true,
