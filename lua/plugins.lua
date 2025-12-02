@@ -1,7 +1,23 @@
 return {
   -- Autopairs
   {
-    "windwp/nvim-autopairs"
+    "neovim/nvim-lspconfig",
+    config = function()
+      vim.diagnostic.config({
+        virtual_text = true,
+        signs = true,
+        update_in_insert = false,
+        underline = true,
+        severity_sort = false,
+        float = true,
+      })
+    end,
+  },
+  {
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    enabled = true,
+    config = true,
   },
 
   -- bufferline
@@ -12,7 +28,103 @@ return {
     },
   },
 
-  -- Colorscheme
+  -- Blink
+  {
+    "saghen/blink.cmp",
+    dependencies = { "L3MON4D3/LuaSnip" },
+    opts = {
+      snippets = {
+        preset = "luasnip",
+      },
+      keymap = {
+        ['<C-space>'] = { 'show', 'show_documentation', 'hide_documentation' },
+        ['<C-e>'] = { 'hide', 'fallback' },
+        ['<CR>'] = { 'select_and_accept', 'fallback' },
+        ['<Up>'] = { 'select_prev', 'fallback' },
+        ['<Down>'] = { 'select_next', 'fallback' },
+        ['<C-p>'] = { 'select_prev', 'fallback_to_mappings' },
+        ['<C-n>'] = { 'select_next', 'fallback_to_mappings' },
+        ['<C-b>'] = { 'scroll_documentation_up', 'fallback' },
+        ['<C-f>'] = { 'scroll_documentation_down', 'fallback' },
+        ['<Tab>'] = { 'snippet_forward', 'fallback' },
+        ['<S-Tab>'] = { 'snippet_backward', 'fallback' },
+        ['<C-k>'] = { 'show_signature', 'hide_signature', 'fallback' },
+        ['<Esc>'] = { 'cancel', 'fallback' },
+      },
+      completion = {
+        accept = {
+          auto_brackets = {
+            enabled = true,
+          },
+        },
+      },
+    },
+    version = '1.*',
+    config = function(_, opts)
+      vim.lsp.config("*", {
+        capabilities = require("blink.cmp").get_lsp_capabilities()
+      })
+      require("blink.cmp").setup(opts)
+    end,
+  },
+
+  -- Lualine
+  {
+    'nvim-lualine/lualine.nvim',
+    dependencies = {
+      'nvim-tree/nvim-web-devicons'
+    },
+  },
+
+  -- Mason
+  {
+    "mason-org/mason.nvim",
+    opts = {},
+    config = function()
+      require("mason").setup()
+    end,
+  },
+  -- Language Support
+  {
+    "mason-org/mason-lspconfig.nvim",
+    opts = {},
+    config = function()
+      require("mason-lspconfig").setup()
+    end,
+  },
+  -- Snippets
+  {
+    "L3MON4D3/LuaSnip",
+    dependencies = { "rafamadriz/friendly-snippets" },
+    config = function()
+      require("luasnip.loaders.from_vscode").lazy_load()
+    end,
+  }, 
+  {
+    'nvim-tree/nvim-tree.lua',
+    lazy = true,
+    dependencies = {
+      'nvim-tree/nvim-web-devicons',
+    },
+  },
+  {
+    'nvim-telescope/telescope.nvim',
+    tag = "v0.2.0",
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    enabled = true
+  },
+  {
+    'akinsho/toggleterm.nvim',
+    version = "*",
+    config = true
+  },
+  {
+    "nvim-treesitter/nvim-treesitter",
+  },
+  {
+    'folke/which-key.nvim',
+    lazy = true,
+  },
   {
     "sainnhe/everforest",
     enabled = false
@@ -48,84 +160,4 @@ return {
     "dracula/vim",
     enabled = false
   },
-
-  --Hop (Better Navigation)
-  {
-    'smoka7/hop.nvim',
-    version = "*",
-    opts = {
-        keys = 'etovxqpdygfblzhckisuran'
-    },
-    enabled = false
-  },
-
-  -- Lualine
-  {
-    'nvim-lualine/lualine.nvim',
-    dependencies = {
-      'nvim-tree/nvim-web-devicons'
-    },
-  },
-  -- Language Support
-  -- Added this plugin.
-  {
-    'VonHeikemen/lsp-zero.nvim',
-    branch = 'v1.x',
-    dependencies = {
-      -- LSP Support
-      { 'neovim/nvim-lspconfig' },             -- Required
-      { 'williamboman/mason.nvim' },           -- Optional
-      { 'williamboman/mason-lspconfig.nvim' }, -- Optional
-
-      -- Autocompletion
-      { 'hrsh7th/nvim-cmp' },         -- Required
-      { 'hrsh7th/cmp-nvim-lsp' },     -- Required
-      { 'hrsh7th/cmp-buffer' },       -- Optional
-      { 'hrsh7th/cmp-path' },         -- Optional
-      { 'saadparwaiz1/cmp_luasnip' }, -- Optional
-      { 'hrsh7th/cmp-nvim-lua' },     -- Optional
-
-      -- Snippets
-      { 'L3MON4D3/LuaSnip' },             -- Required
-      { 'rafamadriz/friendly-snippets' }, -- Optional
-    },
-    enabled = true,
-  },
-
-
-  -- Nvimtree (File Explorer)
-  {
-    'nvim-tree/nvim-tree.lua',
-    lazy = true,
-    dependencies = {
-      'nvim-tree/nvim-web-devicons',
-    },
-  },
-
-  -- Telescope
-  {
-    'nvim-telescope/telescope.nvim',
-    tag = '0.1.8',
-    dependencies = { 'nvim-lua/plenary.nvim' },
-    enabled = false
-  },
-
-  -- Toggle Term
-  {
-    'akinsho/toggleterm.nvim',
-    version = "*",
-    config = true
-  },
-
-  -- Treesitter
-  {
-    "nvim-treesitter/nvim-treesitter",
-  },
-
-  -- Which-key
-  {
-    'folke/which-key.nvim',
-    lazy = true,
-  },
-
 }

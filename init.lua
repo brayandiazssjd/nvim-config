@@ -1,10 +1,10 @@
-require "keymaps"
-require "autobots"
-require "lazy-config"
-require "options"
-require "nvim-tree-config"
-require "lsp-config"
-require "whichkey"
-require "lualine-config"
-require "bufferline-config"
-require 'telescope-config'
+require("keymaps")
+require("lazy-config")
+require("autobots")
+require("options")
+require("nvim-tree-config")
+require("whichkey")
+require("lualine-config")
+require("bufferline-config")
+require("telescope-config")
+--require("lsp-config")
