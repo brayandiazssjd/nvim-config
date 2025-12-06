@@ -15,8 +15,8 @@ opt.splitright = true -- Put new windows right of current
 opt.tabstop = 4 -- Number of spaces tabs count for
 opt.undofile = true
 opt.wildmode = "longest:full,full" -- Command-line completion mode
-opt.termguicolors = true -- True color support
-opt.expandtab = true -- Use spaces instead of tabs
+opt.expandtab = true -- Use spaces tinstead of tabs
 vim.o.background = "light"
-cmd.colorscheme "tokyonight-day" -- Set colorscheme
 cmd.language "en_US"
+
+
